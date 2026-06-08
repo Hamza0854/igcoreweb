@@ -10,135 +10,205 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="bg-base text-hi is-logged-in">
+<body class="bg-base text-hi is-logged-in betslip-mode-single">
 
 <input type="checkbox" id="sbToggle" hidden>
 <label for="sbToggle" class="scrim lg:hidden"></label>
 
-<!-- ============== SIDEBAR ============== -->
-<aside class="sidebar bg-elevated border-r border-line flex flex-col fixed top-0 left-0 h-screen z-40">
-  <div class="sidebar__brand flex items-center gap-3 px-5 h-[66px] shrink-0">
-    <label for="sbToggle" class="lg:hidden btn-ghost w-9 h-9 grid place-items-center rounded-[10px] shrink-0 cursor-pointer" aria-label="Open menu">
-      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-    </label>
-    <a href="#" class="logo-brand flex items-center gap-1.5 no-underline text-inherit">
-      <span class="font-display text-[22px] leading-none">iG</span><span class="logo-mark" aria-hidden="true"></span>
-      <span class="logo-core font-display text-[22px] leading-none tracking-tight">CORE</span>
-      <span class="logo-demo guest-only">DEMO</span>
-    </a>
-  </div>
+<!-- ============== SIDEBAR (igcoredemo left-sidebar) ============== -->
+<aside class="sidebar sidebar--expanded">
+  <div class="sidebar__inner">
+    <header class="sidebar__header">
+      <label for="sbToggle" class="sidebar__toggle sidebar__toggle--mobile" aria-label="Open menu">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M2.5 2.5h15v1.67H2.5V2.5Zm0 5h7.5v1.67H2.5V7.5Zm0 5h15v1.67H2.5V12.5Zm0 5h15V19H2.5v-1.5Z" fill="currentColor"/><path d="M4.04 6.45 7.31 8.9l-3.27 2.45c-.28.21-.47.5-.55.82-.08.32 0 .66.22.94.22.28.55.44.89.44.34 0 .67-.16.89-.44l3.27-2.45-3.27-2.45c-.22-.28-.55-.44-.89-.44-.34 0-.67.16-.89.44-.22.28-.3.62-.22.94.08.32.27.61.55.82Z" fill="currentColor"/></svg>
+      </label>
+      <button type="button" class="sidebar__toggle sidebar__toggle--desktop" id="sidebarCollapse" aria-label="Collapse sidebar" aria-expanded="true">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M2.5 2.5h15v1.67H2.5V2.5Zm0 5h7.5v1.67H2.5V7.5Zm0 5h15v1.67H2.5V12.5Zm0 5h15V19H2.5v-1.5Z" fill="currentColor"/><path d="M4.04 6.45 7.31 8.9l-3.27 2.45c-.28.21-.47.5-.55.82-.08.32 0 .66.22.94.22.28.55.44.89.44.34 0 .67-.16.89-.44l3.27-2.45-3.27-2.45c-.22-.28-.55-.44-.89-.44-.34 0-.67.16-.89.44-.22.28-.3.62-.22.94.08.32.27.61.55.82Z" fill="currentColor"/></svg>
+      </button>
+      <a href="#" class="sidebar__logo">
+        <span class="sidebar__logo-word auth-only font-display" aria-label="iGCORE">
+          <span class="sidebar__logo-ig">iG</span><span class="logo-mark" aria-hidden="true"></span><span class="sidebar__logo-core">CORE</span>
+        </span>
+        <span class="sidebar__logo-fallback guest-only font-display">iG<span class="logo-mark" aria-hidden="true"></span><span class="logo-demo">DEMO</span></span>
+      </a>
+    </header>
 
-  <div class="px-3 pb-3 shrink-0">
-    <div class="mode-toggle rounded-full p-1 flex gap-1">
-      <button class="mode-pill active flex-1 flex items-center justify-center gap-2 py-2 rounded-full text-[14px]" onclick="setMode(this)">
-        <img src="./images/football-ico-D224JjSd.webp" alt="" class="w-6 h-6 rounded-full object-cover"> Sports
-      </button>
-      <button class="mode-pill flex-1 flex items-center justify-center gap-2 py-2 rounded-full text-[14px]" onclick="setMode(this)">
-        <img src="./images/casino-ico-C9Z4WjCn.webp" alt="" class="w-6 h-6 rounded-full object-cover"> Casino
-      </button>
+    <div class="sidebar__modes">
+      <a href="#" class="sidebar__mode sidebar__mode--sports active" onclick="setMode(this);return false">
+        <span class="sidebar__mode-icon"><img src="./images/football-ico-D224JjSd.webp" alt=""></span>
+        <span class="sidebar__mode-text">Sports</span>
+      </a>
+      <a href="#" class="sidebar__mode sidebar__mode--casino" onclick="setMode(this);return false">
+        <span class="sidebar__mode-icon"><img src="./images/casino-ico-C9Z4WjCn.webp" alt=""></span>
+        <span class="sidebar__mode-text">Casino</span>
+      </a>
     </div>
-  </div>
 
-  <!-- Logged-in wallet card -->
-  <div class="auth-only px-3 pb-3 shrink-0">
-    <div class="sidebar-wallet">
-      <div class="sidebar-wallet__head">
-        <div class="sidebar-wallet__user">
-          <span class="sidebar-wallet__avatar" aria-hidden="true">
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M5 20c0-4 3.5-6 7-6s7 2 7 6"/></svg>
+    <div class="auth-only user-card">
+      <div class="user-card__head">
+        <div class="user-card__main">
+          <span class="user-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
           </span>
-          <div class="sidebar-wallet__meta min-w-0">
-            <div class="sidebar-wallet__name truncate">hamzaali0854...</div>
-            <div class="sidebar-wallet__id">ID: 215</div>
+          <div class="user-card__info-list">
+            <div class="user-card__info-item user-card__email-ellipsis">hamzaali0854...</div>
+            <div class="user-card__info-item user-card__phone">ID: 215</div>
           </div>
         </div>
-        <button type="button" class="sidebar-wallet__bell btn-ghost" aria-label="Notifications">
-          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <button type="button" class="user-card__messages" aria-label="Notifications">
+          <span class="user-card__messages-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </span>
         </button>
       </div>
-      <div class="sidebar-wallet__balance-row">
-        <span class="sidebar-wallet__balance-label">Balance</span>
-        <button type="button" class="sidebar-wallet__eye btn-ghost" id="balanceToggle" aria-label="Show balance" aria-pressed="true">
-          <svg class="w-4 h-4 eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-          <svg class="w-4 h-4 eye-closed hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-10-8-10-8a18.45 18.45 0 0 1 5.06-6.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 10 8 10 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><path d="M1 1l22 22"/></svg>
-        </button>
+      <div class="user-card__wallets">
+        <div class="user-card__wallets-head">
+          <span>Balance</span>
+          <button type="button" class="user-card__balance-eye" id="balanceToggle" aria-label="Hide balance" aria-pressed="true">
+            <svg class="eye-open" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            <svg class="eye-closed hidden" viewBox="0 0 24 24" fill="currentColor"><path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78 3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/></svg>
+          </button>
+        </div>
+        <div class="user-card__info-item user-card__info-item--balance" id="sidebarBalance">0.00 USD</div>
       </div>
-      <div class="sidebar-wallet__amount" id="sidebarBalance">0.00 USD</div>
-      <div class="sidebar-wallet__actions">
-        <button type="button" class="btn-withdraw">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12"/><path d="M8 11l4 4 4-4"/><path d="M4 21h16"/></svg>
-          Withdraw
-        </button>
-        <button type="button" class="btn-deposit-fill">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M12 14v4M10 16h4"/></svg>
-          Deposit
-        </button>
-      </div>
+      <ul class="user-card__links-list">
+        <li class="user-card__link-item">
+          <button type="button" class="user-card__link ui-btn ui-btn--primary ui-btn--outlined ui-btn--s">
+            <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12"/><path d="M8 11l4 4 4-4"/><path d="M4 21h16"/></svg></span>
+            <span class="btn-label">Withdraw</span>
+          </button>
+        </li>
+        <li class="user-card__link-item">
+          <button type="button" class="user-card__link ui-btn ui-btn--primary ui-btn--s">
+            <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M12 14v4M10 16h4"/></svg></span>
+            <span class="btn-label">Deposit</span>
+          </button>
+        </li>
+      </ul>
     </div>
-  </div>
 
-  <div class="px-3 flex-1 overflow-y-auto no-bar">
-    <nav class="nav-card rounded-[22px] p-2 space-y-0.5">
-      <a href="#" class="nav-item active flex items-center gap-3 px-4 py-3 text-[15px]"><svg class="w-[21px] h-[21px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.7 12 3l9 7.7"/><path d="M5 9.5V21h14V9.5"/></svg><span>Home</span></a>
-      <a href="#" class="nav-item flex items-center gap-3 px-4 py-3 text-[15px]"><svg class="w-[21px] h-[21px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16.5" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4M9 14l2 2 4-4"/></svg><span>Today</span></a>
-      <a href="#" class="nav-item flex items-center gap-3 px-4 py-3 text-[15px]"><svg class="w-[21px] h-[21px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5.5" width="14.5" height="13" rx="2.5"/><path d="m22 8.5-5.5 4 5.5 4z"/></svg><span>Live</span></a>
-      <a href="#" class="nav-item flex items-center gap-3 px-4 py-3 text-[15px]"><svg class="w-[21px] h-[21px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9h4M7 13h7M16 9h1M3 5l3-2h12l3 2"/></svg><span>Live Results</span></a>
-      <a href="#" class="nav-item flex items-center gap-3 px-4 py-3 text-[15px]"><svg class="w-[21px] h-[21px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6.5 6.5l2 2M15.5 15.5l2 2M17.5 6.5l-2 2M8.5 15.5l-2 2"/></svg><span>Live Casino</span></a>
-      <a href="#" class="nav-item flex items-center gap-3 px-4 py-3 text-[15px]"><svg class="w-[21px] h-[21px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 14c0-2 3-3 7-3s7 1 7 3M3 14h18M6 14c0 2 2.5 3 6 3s6-1 6-3"/><ellipse cx="12" cy="9" rx="3.5" ry="2"/></svg><span>Virtual Sports</span></a>
-      <a href="#" class="nav-item flex items-center gap-3 px-4 py-3 text-[15px]"><svg class="w-[21px] h-[21px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="9" rx="3" ry="4"/><path d="M9 11c-3 1-5 3-5 5 3 0 5-1 6-2M15 11c3 1 5 3 5 5-3 0-5-1-6-2M9 17l-1.5 3M15 17l1.5 3M12 17v3"/></svg><span>Crash Games</span></a>
-      <a href="#" class="nav-item flex items-center gap-3 px-4 py-3 text-[15px]"><svg class="w-[21px] h-[21px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M3 8h18M12 8v13M12 8c-2-3.5-6.5-3-6.5.3M12 8c2-3.5 6.5-3 6.5.3"/></svg><span>Promotions</span></a>
+    <nav class="sidebar__nav-panel">
+      <ul class="sidebar__nav">
+        <li class="sidebar__nav-item"><a href="#" class="sidebar__nav-link active"><span class="sidebar__nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.7 12 3l9 7.7"/><path d="M5 9.5V21h14V9.5"/></svg></span><span class="sidebar__nav-text">Home</span></a></li>
+        <li class="sidebar__nav-item"><a href="#" class="sidebar__nav-link"><span class="sidebar__nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16.5" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4M9 14l2 2 4-4"/></svg></span><span class="sidebar__nav-text">Today</span></a></li>
+        <li class="sidebar__nav-item"><a href="#" class="sidebar__nav-link"><span class="sidebar__nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5.5" width="14.5" height="13" rx="2.5"/><path d="m22 8.5-5.5 4 5.5 4z"/></svg></span><span class="sidebar__nav-text">Live</span></a></li>
+        <li class="sidebar__nav-item"><a href="#" class="sidebar__nav-link"><span class="sidebar__nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9h4M7 13h7M16 9h1M3 5l3-2h12l3 2"/></svg></span><span class="sidebar__nav-text">Live Results</span></a></li>
+        <li class="sidebar__nav-item"><a href="#" class="sidebar__nav-link"><span class="sidebar__nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></span><span class="sidebar__nav-text">Live Casino</span></a></li>
+        <li class="sidebar__nav-item"><a href="#" class="sidebar__nav-link"><span class="sidebar__nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 14c0-2 3-3 7-3s7 1 7 3M3 14h18M6 14c0 2 2.5 3 6 3s6-1 6-3"/><ellipse cx="12" cy="9" rx="3.5" ry="2"/></svg></span><span class="sidebar__nav-text">Virtual Sports</span></a></li>
+        <li class="sidebar__nav-item"><a href="#" class="sidebar__nav-link"><span class="sidebar__nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="9" rx="3" ry="4"/><path d="M9 11c-3 1-5 3-5 5 3 0 5-1 6-2M15 11c3 1 5 3 5 5-3 0-5-1-6-2"/></svg></span><span class="sidebar__nav-text">Crash Games</span></a></li>
+        <li class="sidebar__nav-item"><a href="#" class="sidebar__nav-link"><span class="sidebar__nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M3 8h18M12 8v13"/></svg></span><span class="sidebar__nav-text">Promotions</span></a></li>
+      </ul>
     </nav>
-  </div>
 
-  <div class="p-3 shrink-0">
-    <div class="theme-seg rounded-full p-1 flex gap-1">
-      <button id="themeDark" class="theme-opt active flex-1 flex items-center justify-center gap-2 py-2.5 text-[14px]" onclick="setTheme('dark')"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg> Dark</button>
-      <button id="themeLight" class="theme-opt flex-1 flex items-center justify-center gap-2 py-2.5 text-[14px]" onclick="setTheme('light')"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.4 1.4M17.6 17.6 19 19M19 5l-1.4 1.4M6.4 17.6 5 19"/></svg> Light</button>
+    <a href="#" class="sb-promo auth-only">
+      <picture class="sb-promo__pic">
+        <source srcset="./images/sidebar-fifa-banner-Bm_5Gosi.webp" type="image/webp">
+        <img src="./images/sidebar-fifa-banner.jpg" alt="" loading="lazy">
+      </picture>
+      <div class="sb-promo__content">
+        <div class="sb-promo__title">Who lifts<br>the cup?</div>
+        <span class="sb-promo__btn">Bet Now <span class="sb-promo__btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </div>
+    </a>
+
+    <div class="sidebar__theme">
+      <button type="button" id="themeDark" class="sidebar__theme-opt active" onclick="setTheme('dark')">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <span>Dark</span>
+      </button>
+      <button type="button" id="themeLight" class="sidebar__theme-opt" onclick="setTheme('light')">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2"/></svg>
+        <span>Light</span>
+      </button>
     </div>
   </div>
 </aside>
 
 <!-- ============== MAIN ============== -->
-<div class="main-shell lg:ml-[248px]">
+<div class="main-shell">
 
-  <header class="site-header sticky top-0 z-30 bg-base/95 backdrop-blur flex items-center gap-2 sm:gap-3 px-3 sm:px-4 md:px-6 min-h-[56px] h-14 sm:h-[66px]">
-    <label for="sbToggle" class="lg:hidden btn-ghost w-9 h-9 sm:w-10 sm:h-10 grid place-items-center rounded-[10px] cursor-pointer shrink-0"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></label>
-    <button type="button" class="site-header__search btn-ghost w-9 h-9 sm:w-10 sm:h-10 grid place-items-center rounded-[10px] shrink-0" aria-label="Search"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></button>
-    <button type="button" class="site-header__promo btn-magenta text-[13px] sm:text-[15px] font-semibold px-3 sm:px-5 py-2 sm:py-2.5 rounded-full flex items-center gap-1.5 sm:gap-2 shrink-0"><svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13M12 8c-2-3.5-6.5-3-6.5.3M12 8c2-3.5 6.5-3 6.5.3"/></svg><span class="site-header__promo-text">Promotions</span></button>
-    <div class="flex-1 min-w-2"></div>
+  <header class="site-header" id="header" role="banner">
+    <div class="site-header__content">
+      <nav class="site-header__main" aria-label="Primary navigation">
+        <a href="#" class="site-header__logo" aria-label="Go to homepage">
+          <img src="./images/logo-header.svg" alt="iGCORE" class="site-header__logo-img" width="136" height="32">
+        </a>
+        <!-- <label for="sbToggle" class="site-header__menu" aria-label="Open menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </label> -->
+        <button type="button" class="site-header__search" aria-label="Open search">
+          <span class="site-header__search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="m21 21-4.3-4.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </span>
+        </button>
+        <button type="button" class="site-header__promo" aria-label="View promotions">
+          <span class="site-header__promo-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 8V21M12 8H7.5C6.837 8 6.201 7.737 5.732 7.268 5.263 6.799 5 6.163 5 5.5 5 4.837 5.263 4.201 5.732 3.732 6.201 3.263 6.837 3 7.5 3 11 3 12 8 12 8ZM12 8H16.5C17.163 8 17.799 7.737 18.268 7.268 18.737 6.799 19 6.163 19 5.5 19 4.837 18.737 4.201 18.268 3.732 17.799 3.263 17.163 3 16.5 3 13 3 12 8 12 8ZM3 14H21M6.2 21H17.8C18.92 21 19.48 21 19.908 20.782 20.284 20.59 20.59 20.284 20.782 19.908 21 19.48 21 18.92 21 17.8V11.2C21 10.08 21 9.52 20.782 9.092 20.59 8.716 20.284 8.41 19.908 8.218 19.48 8 18.92 8 17.8 8H6.2C5.08 8 4.52 8 4.092 8.218 3.716 8.41 3.41 8.716 3.218 9.092 3 9.52 3 10.08 3 11.2V17.8C3 18.92 3 19.48 3.218 19.908 3.41 20.284 3.716 20.59 4.092 20.782 4.52 21 5.08 21 6.2 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="site-header__promo-text">Promotions</span>
+        </button>
+      </nav>
 
-    <!-- Guest (logged out) -->
-    <div class="header-guest flex items-center gap-2 shrink-0">
-      <button type="button" class="site-header__chat w-8 h-8 sm:w-10 sm:h-10 grid place-items-center rounded-full shrink-0" style="background:#2a9fed" aria-label="Chat"><svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg></button>
-      <button type="button" class="site-header__signin btn-white text-[13px] sm:text-[15px] font-semibold px-3 sm:px-5 py-2 sm:py-2.5 rounded-full shrink-0">Sign in</button>
-      <button type="button" class="site-header__signup btn-accent text-[13px] sm:text-[15px] font-semibold px-3 sm:px-5 py-2 sm:py-2.5 rounded-full shrink-0">Sign up</button>
-      <button type="button" class="site-header__lang w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-card2 grid place-items-center text-xs sm:text-sm shrink-0" aria-label="Language">🇬🇧</button>
-      <button type="button" class="site-header__share w-8 h-8 sm:w-9 sm:h-9 rounded-full grid place-items-center text-white shrink-0 header-icon-btn--accent" aria-label="Share"><svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><path d="M12 8v4M12 12l-5 4M12 12l5 4"/></svg></button>
-    </div>
-
-    <!-- Logged in -->
-    <div class="header-auth flex items-center gap-1.5 sm:gap-2 shrink-0">
-      <button type="button" class="header-icon-btn header-icon-btn--telegram" aria-label="Telegram">
-        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8-1.72 8.09c-.13.58-.48.72-.97.45l-2.69-1.98-1.3 1.25c-.14.14-.26.26-.54.26l.19-2.72 4.98-4.5c.22-.19-.05-.3-.34-.11l-6.15 3.88-2.65-.83c-.58-.18-.59-.58.12-.88l10.36-3.99c.48-.18.9.11.74.68z"/></svg>
-      </button>
-      <button type="button" class="header-icon-btn header-icon-btn--wheel" aria-label="Lucky wheel">
-        <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg>
-      </button>
-      <div class="header-balance-pill">
-        <span class="header-balance-pill__amt" id="headerBalance">$ 0.00</span>
-        <button type="button" class="header-balance-pill__dep">Deposit</button>
+      <!-- Guest (logged out) -->
+      <div class="header-guest site-header__info" role="toolbar" aria-label="User actions">
+        <button type="button" class="site-header__chat header-icon-btn header-icon-btn--telegram" aria-label="Chat">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2 11 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="site-header__signin">Sign in</button>
+        <button type="button" class="site-header__signup">Sign up</button>
+        <div class="header-settings">
+          <button type="button" class="header-settings__btn header-settings__btn--lang" aria-label="Language">
+            <span class="header-settings__icon header-settings__icon--lang"><img src="./images/flag-gb.svg" alt="" width="24" height="24"></span>
+          </button>
+          <button type="button" class="header-settings__btn" aria-label="Settings">
+            <span class="header-settings__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M2 14h4M10 8h4M18 16h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            </span>
+          </button>
+        </div>
       </div>
-      <button type="button" class="header-icon-btn header-icon-btn--user" aria-label="Account">
-        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="4"/><path d="M5 20c0-4 3.5-6 7-6s7 2 7 6"/></svg>
-      </button>
-      <button type="button" class="header-icon-btn header-icon-btn--lang" aria-label="Language">🇬🇧</button>
-      <button type="button" class="header-icon-btn header-icon-btn--settings" aria-label="Settings">
-        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M2 14h4M10 8h4M18 16h4"/></svg>
-      </button>
+
+      <!-- Logged in -->
+      <div class="header-auth site-header__info" role="toolbar" aria-label="User actions">
+        <button type="button" class="header-icon-btn header-icon-btn--telegram" aria-label="Contact us on Telegram">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+        <div class="header-fortune-wheel">
+          <button type="button" class="header-icon-btn header-icon-btn--wheel" aria-label="Open fortune wheel">
+            <svg viewBox="0 0 38 40" fill="none" aria-hidden="true"><g clip-path="url(#fw)"><path d="M19 39.815C29.444 39.815 37.909 31.247 37.909 20.677 37.909 10.107 29.444 1.538 19 1.538 8.558 1.538.092 10.107.092 20.677.092 31.247 8.558 39.815 19 39.815Z" fill="#FEC200"/><path d="M13.618 7.538 17.418 16.831C16.369 17.269 15.594 18.1 15.191 19.085L6.018 15.231C7.394 11.869 10.039 9.038 13.618 7.538ZM31.987 15.238 22.799 19.085C22.366 18.023 21.545 17.238 20.572 16.831L24.372 7.538C27.701 8.931 30.505 11.608 31.987 15.238ZM17.418 24.531 13.618 33.823C10.289 32.431 7.485 29.754 6.003 26.131L15.184 22.284C15.624 23.338 16.445 24.123 17.418 24.531ZM31.98 26.123C30.604 29.492 27.959 32.323 24.372 33.823L20.572 24.531C21.621 24.092 22.396 23.261 22.799 22.277L31.98 26.123Z" fill="#FF4823"/><path d="M15.192 19.085C14.789 20.077 14.759 21.216 15.192 22.277L6.011 26.123C4.529 22.5 4.643 18.6 6.019 15.231L15.192 19.085ZM24.373 7.539 20.565 16.831C19.585 16.423 18.46 16.392 17.411 16.831L13.611 7.539C17.198 6.039 21.052 6.146 24.373 7.539ZM31.988 15.239C33.47 18.862 33.356 22.762 31.98 26.131L22.8 22.277C23.202 21.285 23.233 20.146 22.8 19.085L31.988 15.239ZM20.573 24.531 24.373 33.823C20.793 35.323 16.948 35.216 13.619 33.816L17.419 24.523C18.399 24.939 19.524 24.969 20.573 24.531Z" fill="#E6E9EE"/><path d="M21.666 4.238C21.666 5.731 18.999 10.615 18.999 10.615S16.331 5.731 16.331 4.238C16.331 2.746 17.524 1.538 18.999 1.538 20.473 1.538 21.666 2.746 21.666 4.238Z" fill="#009AFF"/><path d="M19 22.215C19.84 22.215 20.52 21.527 20.52 20.677 20.52 19.827 19.84 19.138 19 19.138 18.161 19.138 17.48 19.827 17.48 20.677 17.48 21.527 18.161 22.215 19 22.215Z" fill="#AAB2BD"/></g><defs><clipPath id="fw"><rect width="38" height="40" fill="#fff"/></clipPath></defs></svg>
+          </button>
+        </div>
+        <div class="header-balance-deposit">
+          <div class="header-balance" id="balance-button" aria-label="Current balance: 0.00">
+            <span class="header-balance__amount" aria-live="polite">
+              <span class="header-balance__amount-value">
+                <span class="header-balance__currency" aria-hidden="true">$</span>
+                <span class="header-balance__value" id="headerBalance">0.00</span>
+              </span>
+            </span>
+            <button type="button" class="header-balance__dep">Deposit</button>
+          </div>
+        </div>
+        <button type="button" class="header-icon-btn header-icon-btn--user" aria-label="Account menu">
+          <span class="header-icon-btn__user-img" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          </span>
+        </button>
+        <div class="header-settings">
+          <button type="button" class="header-settings__btn header-settings__btn--lang" aria-label="Language">
+            <span class="header-settings__icon header-settings__icon--lang"><img src="./images/flag-gb.svg" alt="" width="24" height="24"></span>
+          </button>
+          <button type="button" class="header-settings__btn" aria-label="Settings">
+            <span class="header-settings__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M2 14h4M10 8h4M18 16h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            </span>
+          </button>
+        </div>
+      </div>
     </div>
   </header>
 
-  <main class="home-top max-w-[1480px] mx-auto">
+  <main class="home-top">
 
     <!-- FIFA COUNTDOWN -->
     <section class="reveal countdown-banner" aria-label="FIFA World Cup 2026 countdown">
@@ -245,6 +315,11 @@
         <div id="category-hub" class="category-hub"></div>
       </section>
 
+      <!-- PROMO BANNERS (TURN UP THE ACTION / DAILY REWARDS / NEXT WINNER) -->
+      <section class="reveal promo-banners-wrap" aria-label="Promotions">
+        <div id="promo-banners" class="promo-banners"></div>
+      </section>
+
       <!-- SPORTS -->
       <section class="reveal">
         <div class="sec-head"><h2 class="sec-title">Sports</h2>
@@ -331,21 +406,140 @@
       </section>
 
       <!-- MATCH TABLE -->
-      <section class="reveal space-y-3">
-        <div class="card flex items-center gap-2 px-3 py-2" style="border-radius:12px">
-          <button class="tab active text-[13px] px-3 py-1.5 rounded-full">Top Events</button>
-          <button class="tab text-[13px] px-3 py-1.5 rounded-full">Live</button>
-          <button class="tab text-[13px] px-3 py-1.5 rounded-full">Today &#9662;</button>
-          <div class="flex-1"></div><button class="text-mid">&#128269;</button>
+      <section class="reveal space-y-3 events-panel">
+        <div class="events-panel__tabs card flex items-center gap-1.5 px-2 py-2 overflow-x-auto no-bar" style="border-radius:12px">
+          <button class="tab active text-[13px] px-3 py-1.5 rounded-full shrink-0">Top Events</button>
+          <button class="tab text-[13px] px-3 py-1.5 rounded-full shrink-0">Live</button>
+          <button class="tab text-[13px] px-3 py-1.5 rounded-full shrink-0">Upcoming events</button>
+          <button class="tab text-[13px] px-3 py-1.5 rounded-full shrink-0">Today &#9662;</button>
+          <div class="flex-1 min-w-2"></div>
+          <button class="events-panel__tool text-mid shrink-0" type="button" aria-label="Refresh">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="events-panel__tool text-mid shrink-0" type="button" aria-label="Search events">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3" stroke-linecap="round"/></svg>
+          </button>
         </div>
-        <div class="flex gap-2 overflow-x-auto no-bar">
-          <button class="tab active text-[13px] px-3 py-1.5 rounded-full flex items-center gap-1.5">&#9917; Football</button>
-          <button class="tab text-[13px] px-3 py-1.5 rounded-full flex items-center gap-1.5">&#127936; Basketball</button>
-          <button class="tab text-[13px] px-3 py-1.5 rounded-full flex items-center gap-1.5">&#127934; Tennis</button>
-          <button class="tab text-[13px] px-3 py-1.5 rounded-full flex items-center gap-1.5">&#127954; Ice Hockey</button>
-          <button class="tab text-[13px] px-3 py-1.5 rounded-full flex items-center gap-1.5">&#127952; Volleyball</button>
+        <div class="sport-tabs flex gap-2 overflow-x-auto no-bar pb-1">
+          <button class="tab active text-[13px] px-3 py-1.5 rounded-full flex items-center gap-1.5 shrink-0">&#9917; Football</button>
+          <button class="tab text-[13px] px-3 py-1.5 rounded-full flex items-center gap-1.5 shrink-0">&#127936; Basketball</button>
+          <button class="tab text-[13px] px-3 py-1.5 rounded-full flex items-center gap-1.5 shrink-0">&#127934; Tennis</button>
+          <button class="tab text-[13px] px-3 py-1.5 rounded-full flex items-center gap-1.5 shrink-0">&#127954; Ice Hockey</button>
+          <button class="tab text-[13px] px-3 py-1.5 rounded-full flex items-center gap-1.5 shrink-0">&#127952; Volleyball</button>
         </div>
-        <div class="card overflow-hidden" style="border-radius:12px"><div class="overflow-x-auto"><div style="min-width:860px">
+
+        <!-- Mobile event list (reference: main-menu-event + market dropdown) -->
+        <div class="events-mobile card overflow-hidden" style="border-radius:12px">
+          <div class="events-mobile__league" id="events-mobile-league">
+            <div class="events-mobile__league-head">
+              <button type="button" class="events-mobile__collapse" aria-expanded="true" aria-label="Collapse league">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+              </button>
+              <div class="events-mobile__league-info">
+                <span class="events-mobile__league-icon" aria-hidden="true">&#127941;</span>
+                <div class="events-mobile__league-titles">
+                  <span class="events-mobile__league-region">World</span>
+                  <span class="events-mobile__league-name">World Cup</span>
+                </div>
+              </div>
+              <div class="events-mobile__cols">
+                <span class="events-mobile__col-label">T1</span>
+                <span class="events-mobile__col-label">1</span>
+                <div class="events-mobile__col-dropdown">
+                  <button type="button" class="events-mobile__col-trigger" aria-expanded="false" aria-haspopup="listbox">
+                    <span>X</span>
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                  </button>
+                  <ul class="events-mobile__market-menu" role="listbox">
+                    <li><button type="button" class="is-active" role="option" aria-selected="true">Match Result</button></li>
+                    <li><button type="button" role="option">Over/Under</button></li>
+                    <li><button type="button" role="option">Both Teams To Score</button></li>
+                    <li><button type="button" role="option">Asian Handicap</button></li>
+                    <li><button type="button" role="option">Double Chance</button></li>
+                  </ul>
+                </div>
+                <span class="events-mobile__col-label">2</span>
+              </div>
+            </div>
+            <div class="events-mobile__list">
+              <article class="main-menu-event">
+                <button type="button" class="pin-button" aria-label="Pin event" aria-pressed="false">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 3H9v5l-4 4v2h5.2v5.8h1.6v-5.8H21v-2l-4-4V3Z"/></svg>
+                </button>
+                <div class="main-menu-event__body">
+                  <div class="main-menu-event__info">
+                    <div class="main-menu-event__date">12 Jun at 00:00</div>
+                    <div class="main-menu-event__team">
+                      <img src="https://flagcdn.com/w20/mx.png" alt="" width="16" height="12">
+                      <span class="main-menu-event__team-name">Mexico</span>
+                    </div>
+                    <div class="main-menu-event__team">
+                      <img src="https://flagcdn.com/w20/za.png" alt="" width="16" height="12">
+                      <span class="main-menu-event__team-name">South Africa</span>
+                      <button type="button" class="star-button" aria-label="Add to favorites" aria-pressed="false">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 7.1-1.01z"/></svg>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="main-menu-event__markets">
+                    <div class="main-menu-event__extras">
+                      <label class="checkmark-wrapper" title="Team 1">
+                        <input type="checkbox" class="checkmark-input">
+                        <span class="checkmark" aria-hidden="true"></span>
+                      </label>
+                      <span class="events-mobile__market-pill">+1159</span>
+                      <span class="events-mobile__bb" title="Bet Builder">BB</span>
+                    </div>
+                    <div class="main-menu-event__market">
+                      <button type="button" class="main-menu-event__odd odd--active"><span class="odd__coeficient up">1.44</span></button>
+                      <button type="button" class="main-menu-event__odd odd--active"><span class="odd__coeficient up">4.56</span></button>
+                      <button type="button" class="main-menu-event__odd"><span class="odd__coeficient up">8.84</span></button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="main-menu-event">
+                <button type="button" class="pin-button pin-button--active" aria-label="Unpin event" aria-pressed="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 3H9v5l-4 4v2h5.2v5.8h1.6v-5.8H21v-2l-4-4V3Z"/></svg>
+                </button>
+                <div class="main-menu-event__body">
+                  <div class="main-menu-event__info">
+                    <div class="main-menu-event__date">12 Jun at 07:00</div>
+                    <div class="main-menu-event__team">
+                      <img src="https://flagcdn.com/w20/kr.png" alt="" width="16" height="12">
+                      <span class="main-menu-event__team-name">South Korea</span>
+                    </div>
+                    <div class="main-menu-event__team">
+                      <img src="https://flagcdn.com/w20/cz.png" alt="" width="16" height="12">
+                      <span class="main-menu-event__team-name">Czech Republic</span>
+                      <button type="button" class="star-button star-button--filled" aria-label="Remove from favorites" aria-pressed="true">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 7.1-1.01z"/></svg>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="main-menu-event__markets">
+                    <div class="main-menu-event__extras">
+                      <label class="checkmark-wrapper checkmark-wrapper--checked" title="Team 1">
+                        <input type="checkbox" class="checkmark-input" checked>
+                        <span class="checkmark checkmark--checked" aria-hidden="true"></span>
+                      </label>
+                      <span class="events-mobile__market-pill">+1195</span>
+                      <span class="events-mobile__bb" title="Bet Builder">BB</span>
+                    </div>
+                    <div class="main-menu-event__market">
+                      <button type="button" class="main-menu-event__odd"><span class="odd__coeficient up">2.95</span></button>
+                      <button type="button" class="main-menu-event__odd"><span class="odd__coeficient up">3.10</span></button>
+                      <button type="button" class="main-menu-event__odd odd--active"><span class="odd__coeficient up">2.95</span></button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+          <button type="button" class="events-mobile__all">All Events &rsaquo;</button>
+        </div>
+
+        <div class="events-desktop card overflow-hidden" style="border-radius:12px"><div class="overflow-x-auto"><div style="min-width:860px">
             <div class="hidden lg:grid items-center px-3 py-2.5 border-b border-line bg-card" style="grid-template-columns:1.7fr 46px 46px 46px 10px 48px 48px 48px 10px 48px 34px 48px 10px 56px">
               <span></span><span class="text-center text-[10px] text-low">1</span><span class="text-center text-[10px] text-low">X</span><span class="text-center text-[10px] text-low">2</span><span></span>
               <span class="text-center text-[10px] text-low">O</span><span class="text-center text-[10px] text-low">Totals</span><span class="text-center text-[10px] text-low">U</span><span></span>
@@ -582,14 +776,269 @@
   </footer>
   </div>
 
-  <div class="fixed bottom-4 right-4 z-40">
-    <div class="bet-slip-bar rounded-2xl flex items-center gap-1 p-1.5 text-white">
-      <button class="w-9 h-9 grid place-items-center rounded-xl hover:bg-white/15">&#9650;</button>
-      <button class="px-4 py-2 rounded-xl bg-white text-[var(--accent)] text-[14px] font-bold flex items-center gap-2">BET SLIP <span class="bg-[var(--accent)] text-white w-5 h-5 grid place-items-center rounded-full text-[11px]">0</span></button>
-      <button type="button" class="bet-slip-mybets px-4 py-2 rounded-xl text-[14px] font-semibold hover:bg-white/10">MY BETS</button>
-      <button class="w-9 h-9 grid place-items-center rounded-full bg-white/15 hover:bg-white/25"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg></button>
+  <nav class="bottom-nav" aria-label="Mobile navigation">
+    <div class="bottom-nav__inner">
+      <a href="#" class="bottom-nav__item bottom-nav__item--active">
+        <span class="bottom-nav__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2Zm0 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16Zm-.75 3h1.5v5.25l3.5 2.1-.75 1.23-4-2.4V7Z"/></svg>
+        </span>
+        <span class="bottom-nav__label">Sports</span>
+      </a>
+      <a href="#" class="bottom-nav__item">
+        <span class="bottom-nav__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.03 12.5a7.97 7.97 0 0 1 14.2-4.72l1.06 1.06A9.47 9.47 0 0 0 5.97 12.5H4.03Zm2 0a5.97 5.97 0 0 1 10.62-3.54l1.06 1.06A7.47 7.47 0 0 0 7.97 12.5H6.03ZM12 16a3.5 3.5 0 0 0 0-7 3.5 3.5 0 0 0 0 7Zm8.47-3.5a8.47 8.47 0 0 1-1.75 5.17l1.42 1.42A10.47 10.47 0 0 0 22.47 12.5h-2Zm-2 0a6.47 6.47 0 0 1-1.34 3.96l1.42 1.42A8.47 8.47 0 0 0 18.47 12.5h-2Z"/></svg>
+        </span>
+        <span class="bottom-nav__label">Live</span>
+      </a>
+      <button type="button" class="bottom-nav__item bottom-nav__item--bet-slip" id="openBetSlipMobile" aria-label="Open bet slip">
+        <span class="bottom-nav__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 3h10a2 2 0 0 1 2 2v14l-3-2-3 2-3-2-3 2V5a2 2 0 0 1 2-2Z"/></svg>
+          <span class="bottom-nav__badge" id="bottomNavBetCount">3</span>
+        </span>
+        <span class="bottom-nav__label">Bet slip</span>
+      </button>
+      <a href="#" class="bottom-nav__item">
+        <span class="bottom-nav__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16Zm0 3.25a1.75 1.75 0 1 0 0 3.5 1.75 1.75 0 0 0 0-3.5Zm-4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm9 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z"/></svg>
+        </span>
+        <span class="bottom-nav__label">Casino</span>
+      </a>
+      <button type="button" class="bottom-nav__item" aria-label="Search">
+        <span class="bottom-nav__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10.5 3a7.5 7.5 0 1 1 0 15 7.5 7.5 0 0 1 0-15Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Zm8.78 13.22-3.9-3.9 1.42-1.42 3.9 3.9-1.42 1.42Z"/></svg>
+        </span>
+        <span class="bottom-nav__label">Search</span>
+      </button>
+      <label for="sbToggle" class="bottom-nav__item bottom-nav__item--menu" aria-label="Open menu">
+        <span class="bottom-nav__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h16v2H4V6Zm0 5h16v2H4v-2Zm0 5h16v2H4v-2Z"/></svg>
+        </span>
+        <span class="bottom-nav__label">Menu</span>
+      </label>
     </div>
-  </div>
+  </nav>
+
+  <div class="bet-slip-scrim" id="betSlipScrim" aria-hidden="true"></div>
+
+  <aside class="bet-slip-panel is-collapsed" id="betSlipPanel" aria-label="Bet slip">
+    <header class="bet-slip-panel__header">
+      <button type="button" class="bet-slip-panel__collapse" id="betSlipCollapse" aria-expanded="false" aria-label="Expand bet slip">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+      </button>
+      <div class="bet-slip-panel__toggle" role="tablist">
+        <button type="button" class="bet-slip-panel__tab is-active" data-betslip-view="slip" role="tab" aria-selected="true">
+          BET SLIP <span class="bet-slip-panel__count" id="betSlipCount">3</span>
+        </button>
+        <button type="button" class="bet-slip-panel__tab" data-betslip-view="mybets" role="tab" aria-selected="false">
+          MY BETS <span class="bet-slip-panel__count bet-slip-panel__count--alt" id="myBetsCount">0</span>
+        </button>
+      </div>
+      <div class="bet-slip-panel__header-actions">
+        <button type="button" class="bet-slip-panel__icon-btn" aria-label="Quick bet">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>
+        </button>
+        <button type="button" class="bet-slip-panel__icon-btn" aria-label="Bet slip settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9zM4 12h4M16 12h4M12 4v4M12 16v4"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="bet-slip-panel__view bet-slip-panel__view--slip" data-betslip-panel="slip">
+      <div class="bet-slip-panel__modes" role="tablist">
+        <button type="button" class="bet-slip-panel__mode is-active" data-betslip-mode="single" role="tab">Single</button>
+        <button type="button" class="bet-slip-panel__mode" data-betslip-mode="multiple" role="tab">Multiple</button>
+        <button type="button" class="bet-slip-panel__mode" data-betslip-mode="system" role="tab">System</button>
+      </div>
+
+      <div class="bet-slip-panel__scroll no-bar">
+        <div class="bet-slip-tickets bet-slip-tickets--warning" id="betSlipTickets">
+          <article class="ticket-v3" data-ticket="1">
+            <div class="ticket-v3__card">
+              <button type="button" class="ticket-v3__remove" aria-label="Remove selection">&times;</button>
+              <div class="ticket-v3__head">
+                <span class="ticket-v3__sport" aria-hidden="true">&#9917;</span>
+                <span class="ticket-v3__date">12 June at 00:00</span>
+              </div>
+              <div class="ticket-v3__main">
+                <div class="ticket-v3__info">
+                  <div class="ticket-v3__market">Over/Under, Over (2.5)</div>
+                  <div class="ticket-v3__match">Mexico - South Africa</div>
+                </div>
+                <div class="ticket-v3__odd">2.13</div>
+              </div>
+              <div class="ticket-v3__single-only">
+                <input type="text" class="ticket-v3__stake" placeholder="Stake" inputmode="decimal">
+                <div class="ticket-v3__fast-btns">
+                  <button type="button">+1</button><button type="button">+5</button><button type="button">+10</button>
+                  <button type="button">+20</button><button type="button">Max</button>
+                  <button type="button" class="ticket-v3__edit" aria-label="Edit stake">&#9998;</button>
+                </div>
+                <div class="ticket-v3__possible"><span>Possible Win</span><span class="ticket-v3__win-amt">$0</span></div>
+              </div>
+            </div>
+          </article>
+          <article class="ticket-v3 ticket-v3--boost" data-ticket="2">
+            <div class="ticket-v3__card">
+              <button type="button" class="ticket-v3__remove" aria-label="Remove selection">&times;</button>
+              <div class="ticket-v3__head">
+                <span class="ticket-v3__sport" aria-hidden="true">&#9917;</span>
+                <span class="ticket-v3__date">12 June at 00:00</span>
+              </div>
+              <div class="ticket-v3__main">
+                <div class="ticket-v3__info">
+                  <div class="ticket-v3__market">Match Result, X</div>
+                  <div class="ticket-v3__match">Mexico - South Africa</div>
+                </div>
+                <div class="ticket-v3__odd ticket-v3__odd--boost">
+                  <span class="ticket-v3__rocket" aria-hidden="true">&#128640;</span>4.60
+                </div>
+              </div>
+              <div class="ticket-v3__single-only">
+                <input type="text" class="ticket-v3__stake" placeholder="Stake" inputmode="decimal">
+                <div class="ticket-v3__fast-btns">
+                  <button type="button">+1</button><button type="button">+5</button><button type="button">+10</button>
+                  <button type="button">+20</button><button type="button">Max</button>
+                  <button type="button" class="ticket-v3__edit" aria-label="Edit stake">&#9998;</button>
+                </div>
+                <div class="ticket-v3__possible"><span>Possible Win</span><span class="ticket-v3__win-amt">$0</span></div>
+              </div>
+            </div>
+          </article>
+          <p class="bet-slip-alert bet-slip-alert--warning">
+            <span class="bet-slip-alert__icon" aria-hidden="true">&#9888;</span>
+            Selection cannot be combined
+          </p>
+          <article class="ticket-v3" data-ticket="3">
+            <div class="ticket-v3__card">
+              <button type="button" class="ticket-v3__remove" aria-label="Remove selection">&times;</button>
+              <div class="ticket-v3__head">
+                <span class="ticket-v3__sport" aria-hidden="true">&#9917;</span>
+                <span class="ticket-v3__date">12 June at 07:00</span>
+              </div>
+              <div class="ticket-v3__main">
+                <div class="ticket-v3__info">
+                  <div class="ticket-v3__market">Match Result, 2</div>
+                  <div class="ticket-v3__match">South Korea - Czech Republic</div>
+                </div>
+                <div class="ticket-v3__odd">2.22</div>
+              </div>
+              <div class="ticket-v3__single-only">
+                <input type="text" class="ticket-v3__stake" placeholder="Stake" inputmode="decimal">
+                <div class="ticket-v3__fast-btns">
+                  <button type="button">+1</button><button type="button">+5</button><button type="button">+10</button>
+                  <button type="button">+20</button><button type="button">Max</button>
+                  <button type="button" class="ticket-v3__edit" aria-label="Edit stake">&#9998;</button>
+                </div>
+                <div class="ticket-v3__possible"><span>Possible Win</span><span class="ticket-v3__win-amt">$0</span></div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="bet-slip-combo" data-betslip-mode-panel="multiple">
+          <div class="bet-slip-combo__head">
+            <span>23 bets left to get <strong>x3.00</strong> boost on your winnings!</span>
+            <span class="bet-slip-combo__tag">MIN ODDS: 1.2 COMBO BOOST</span>
+          </div>
+          <div class="bet-slip-combo__bar">
+            <span>x1.03</span><span>x1.05</span><span>x1.10</span><span>x1.15</span><span>x1.20</span><span>x1.25</span>
+          </div>
+          <div class="bet-slip-total-row">
+            <span>Total Odds</span><strong id="totalOdds">21.75</strong>
+          </div>
+          <div class="bet-slip-stake-row">
+            <input type="text" class="bet-slip-stake-input" id="multipleStake" value="1" inputmode="decimal">
+            <div class="ticket-v3__fast-btns">
+              <button type="button" data-stake-add="1">+1</button><button type="button" data-stake-add="5">+5</button>
+              <button type="button" data-stake-add="10">+10</button><button type="button" data-stake-add="20">+20</button>
+              <button type="button" data-stake-max>Max</button>
+              <button type="button" class="ticket-v3__edit" aria-label="Edit stake">&#9998;</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="bet-slip-system" data-betslip-mode-panel="system">
+          <div class="bet-slip-system__head">
+            <span>System 1 Combinations</span>
+            <button type="button" class="bet-slip-system__select">2/3 (3 Opt.) &#9662;</button>
+          </div>
+          <div class="bet-slip-stake-row">
+            <input type="text" class="bet-slip-stake-input" id="systemStake" value="1" inputmode="decimal">
+            <div class="ticket-v3__fast-btns">
+              <button type="button" data-stake-add="1">+1</button><button type="button" data-stake-add="5">+5</button>
+              <button type="button" data-stake-add="10">+10</button><button type="button" data-stake-add="20">+20</button>
+              <button type="button" data-stake-max>Max</button>
+              <button type="button" class="ticket-v3__edit" aria-label="Edit stake">&#9998;</button>
+            </div>
+          </div>
+          <div class="bet-slip-total-row bet-slip-total-row--stack">
+            <span>Total Stake</span>
+            <div class="bet-slip-total-stake">
+              <input type="text" class="bet-slip-stake-input" id="totalStake" value="3" inputmode="decimal">
+              <button type="button" class="bet-slip-max-btn">MAX</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="bet-slip-options">
+          <div class="bet-slip-switch" data-betslip-mode-panel="single multiple">
+            <span>One stake</span>
+            <button type="button" class="bet-slip-switch__btn" id="oneStakeToggle" aria-pressed="false"><span class="bet-slip-switch__knob"></span></button>
+          </div>
+          <button type="button" class="bet-slip-odds-select" id="oddsSelect">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+            <span id="oddsSelectLabel">Accept Any odds</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+          </button>
+          <ul class="bet-slip-odds-menu" id="oddsMenu" hidden>
+            <li><button type="button" class="is-active">Accept Any odds</button></li>
+            <li><button type="button">Accept Higher odds</button></li>
+            <li><button type="button">No odds changes</button></li>
+          </ul>
+          <div class="bet-slip-total-row bet-slip-total-row--winnings" data-betslip-mode-panel="multiple system">
+            <span>Potential winnings</span><strong class="bet-slip-winnings" id="potentialWinnings">21.75 USD</strong>
+          </div>
+          <label class="bet-slip-freebet">
+            <input type="checkbox" class="checkmark-input" id="freeBetCheck">
+            <span class="checkmark" aria-hidden="true"></span>
+            <span>Free Bet</span>
+          </label>
+        </div>
+      </div>
+
+      <footer class="bet-slip-panel__footer">
+        <p class="bet-slip-alert bet-slip-alert--error" id="betSlipError">
+          <span class="bet-slip-alert__icon" aria-hidden="true">&#9888;</span>
+          Min. bet amount is 1 USD
+        </p>
+        <button type="button" class="bet-slip-place-btn" id="placeBetBtn" disabled>Place a bet</button>
+        <div class="bet-slip-balance">
+          <span>Your balance:</span>
+          <span class="bet-slip-balance__val">0 USD</span>
+        </div>
+        <div class="bet-slip-footer-actions">
+          <button type="button" class="bet-slip-footer-btn" id="clearBetsBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M8 6V4h8v2M6 6l1 16h10l1-16"/></svg>
+            Clear
+          </button>
+          <button type="button" class="bet-slip-footer-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></svg>
+            Share
+          </button>
+        </div>
+      </footer>
+    </div>
+
+    <div class="bet-slip-panel__view bet-slip-panel__view--mybets is-hidden" data-betslip-panel="mybets" hidden>
+      <div class="bet-slip-empty">
+        <div class="bet-slip-empty__icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2"><rect x="12" y="8" width="28" height="40" rx="3"/><rect x="24" y="16" width="28" height="40" rx="3"/></svg>
+        </div>
+        <p class="bet-slip-empty__title">You have no open bet slips</p>
+        <a href="#" class="bet-slip-empty__link">Bet history page <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 20 4"/></svg></a>
+      </div>
+    </div>
+  </aside>
 
   <script src="js/home-data.js"></script>
   <script src="js/app.js"></script>

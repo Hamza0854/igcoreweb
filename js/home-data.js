@@ -46,7 +46,7 @@ window.IGCORE_HOME = {
 
   promoBanners: [
     { img: './images/promo-action.webp', fallback: 'https://uploads.wasd.vip/972fed49-d251-416e-b87c-d0f9da728561.webp' },
-    { img: './images/promo-rewards.webp', fallback: 'https://uploads.wasd.vip/84ed4ca1-233f-4213-a3cd-99825d4bc806.webp' },
+    { img: './images/promo-daily-rewards.webp', fallback: 'https://uploads.wasd.vip/84ed4ca1-233f-4213-a3cd-99825d4bc806.webp' },
     { img: './images/promo-winner.webp', fallback: 'https://uploads.wasd.vip/1628aad2-0900-41ce-86c3-e50e12a262fb.webp' }
   ],
 
