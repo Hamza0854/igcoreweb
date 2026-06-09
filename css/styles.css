@@ -93,12 +93,13 @@ body{font-family:'Figtree',system-ui,sans-serif;background:var(--bg-base);color:
 .btn-white:hover{filter:brightness(.96)}
 html.light .btn-white{background:var(--bg-card-2);color:var(--text-hi)}
 
-/* logo */
-.logo-mark{width:21px;height:21px;border-radius:6px;background:linear-gradient(135deg,#ec4899,#a855f7);transform:rotate(45deg);position:relative;box-shadow:0 0 14px -2px rgba(168,92,246,.6)}
-.logo-mark::after{content:'';position:absolute;inset:5px;border-radius:3px;background:linear-gradient(135deg,#f472b6,#c084fc)}
-.logo-demo{font-weight:800;font-size:12px;letter-spacing:.04em;color:#fff;padding:3px 9px;border-radius:7px;margin-left:4px;background:linear-gradient(120deg,#d946a6,#7c3aed)}
-.logo-core{display:none;color:var(--text-hi)}
-body.is-logged-in .logo-core{display:inline}
+/* brand logos */
+.brand-logo{display:block;object-fit:contain;object-position:left center;max-width:100%}
+.brand-logo--primary{height:1.75rem;width:auto;max-width:10.5rem}
+.brand-logo--icon{width:2.25rem;height:3.15rem;border-radius:.5rem;flex-shrink:0}
+.brand-logo--footer{height:auto;max-width:11rem}
+.footer-brand{display:inline-flex;align-items:center;text-decoration:none}
+.footer-brand:hover{opacity:.92}
 .logo-brand:hover{opacity:.92}
 
 /* auth / guest visibility */
@@ -158,19 +159,16 @@ body.is-logged-in .header-auth{display:flex}
 .sidebar__logo{
   display:flex;align-items:center;justify-content:center;
   width:3rem;height:2.75rem;text-decoration:none;color:inherit;
+  flex-shrink:0;overflow:hidden;
 }
 .sidebar--expanded:not(.sidebar--collapsed) .sidebar__logo{
-  flex:1;width:auto;height:2.75rem;margin-inline-start:.5rem;justify-content:flex-start;
+  flex:1;width:auto;min-width:0;height:2.75rem;margin-inline-start:.5rem;justify-content:flex-start;
 }
-.sidebar__logo-word{
-  display:none;align-items:center;gap:.35rem;
-  font-weight:800;font-size:1.0625rem;letter-spacing:-.02em;color:var(--sb-text);white-space:nowrap;
-}
-.sidebar--expanded:not(.sidebar--collapsed) .sidebar__logo-word{display:inline-flex}
-.sidebar__logo-ig,.sidebar__logo-core{color:var(--sb-text)}
-.sidebar--collapsed .sidebar__logo-word .sidebar__logo-ig,
-.sidebar--collapsed .sidebar__logo-word .sidebar__logo-core{display:none}
-.sidebar__logo-fallback{display:flex;align-items:center;gap:.35rem}
+.sidebar__logo-icon{display:block}
+.sidebar__logo-full{display:none;max-width:calc(var(--sidebar-w) - 3.75rem)}
+.sidebar--expanded:not(.sidebar--collapsed) .sidebar__logo-icon{display:none}
+.sidebar--expanded:not(.sidebar--collapsed) .sidebar__logo-full{display:block;height:1.875rem;max-width:100%}
+.sidebar--expanded:not(.sidebar--collapsed) .sidebar__logo .brand-logo--primary{height:3.175rem;max-width:100%}
 
 /* sports / casino mode row */
 .sidebar__modes{
@@ -384,7 +382,7 @@ html.light .sidebar__theme-opt.active{box-shadow:0 1px 4px rgba(0,0,0,.08)}
   display:none;align-items:center;flex-shrink:0;text-decoration:none;
   height:100%;padding-inline-end:.25rem;
 }
-.site-header__logo-img{display:block;height:1.5rem;width:auto;max-width:5rem;object-fit:contain}
+.site-header__logo-img{display:block;height:1.625rem;width:auto;max-width:8.5rem;object-fit:contain;object-position:left center}
 .site-header__menu{
   display:none;place-items:center;width:2.5rem;height:2.5rem;flex-shrink:0;
   background:var(--sb-btn-quaternary);border:1px solid var(--sb-border);
